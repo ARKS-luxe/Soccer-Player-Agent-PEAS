@@ -1,0 +1,66 @@
+
+        elif action == "RUN_TO_BALL":
+            # Move agent towards ball
+            dx = self.ball_loc[0] - self.position[0]
+            dy = self.ball_loc[1] - self.position[1]
+            step = 10 # Speed
+            length = math.sqrt(dx**2 + dy**2)
+            self.position[0] += (dx/length) * step
+            self.position[1] += (dy/length) * step
+            self.stamina -= 10
+            action_result = "Running to ball..."
+
+        elif action == "DRIBBLE":
+            # Move agent AND ball (handled by env) towards goal
+            dx = self.goal_loc[0] - self.position[0]
+            dy = self.goal_loc[1] - self.position[1]
+            step = 8 # Dribbling is slower than running
+            length = math.sqrt(dx**2 + dy**2)
+            self.position[0] += (dx/length) * step
+            self.position[1] += (dy/length) * step
+            self.stamina -= 15
+            # Update Environment (Ball moves too)
+            env.update_environment("DRIBBLE", self)
+            action_result = "Dribbling ball..."
+
+        elif action == "SHOOT":
+            result = env.update_environment("SHOOT", self)
+            self.stamina -= 20
+            action_result = f"SHOOTING! -> {result}"
+
+        # Clamp positions to field
+        self.stamina = min(self.stamina, 100)
+        return action_result
+
+# --- MAIN EXECUTION LOOP ---
+
+# Initialize
+env = SoccerEnvironment()
+player = PEAS_Agent()
+history = []
+
+print("⚽ SIMULATION STARTING ⚽")
+time.sleep(1)
+
+for time_step in range(15): # Run for 15 frames max
+    # 1. Sense
+    percepts = env.get_percepts(player.position)
+    player.sense(percepts)
+    
+    # 2. Decide
+    action = player.decide()
+    
+    # 3. Act
+    result = player.act(action, env)
+    
+    # Logging
+    print(f"\nStep {time_step+1}:")
+    print(f"Stamina: {int(player.stamina)} | Dist to Goal: {int(player.dist_goal)}")
+    print(f"Action: {action}")
+    print(f"Result: {result}")
+    
+    if env.scored:
+        print("\n🏆 MATCH ENDED - GOAL SCORED! 🏆")
+        break
+        
+    time.sleep(0.5) # Small delay to make it readable
