@@ -1,0 +1,43 @@
+⚽ SIMULATION STARTING ⚽
+
+Step 1:
+Stamina: 90 | Dist to Goal: 90
+Action: RUN_TO_BALL
+Result: Running to ball...
+
+Step 2:
+Stamina: 80 | Dist to Goal: 80
+Action: RUN_TO_BALL
+Result: Running to ball...
+
+Step 3:
+Stamina: 70 | Dist to Goal: 70
+Action: RUN_TO_BALL
+Result: Running to ball...
+
+Step 4:
+Stamina: 60 | Dist to Goal: 60
+Action: RUN_TO_BALL
+Result: Running to ball...
+
+Step 5:
+Stamina: 45 | Dist to Goal: 50
+Action: DRIBBLE
+Result: Dribbling ball...
+
+Step 6:
+Stamina: 30 | Dist to Goal: 42
+Action: DRIBBLE
+Result: Dribbling ball...
+
+Step 7:
+Stamina: 20 | Dist to Goal: 34
+Action: RUN_TO_BALL
+Result: Running to ball...
+
+Step 8:
+Stamina: 0 | Dist to Goal: 24
+Action: SHOOT
+Result: SHOOTING! -> GOAL SCORRED! ⚽
+
+🏆 MATCH ENDED - GOAL SCORED! 🏆
